@@ -1,0 +1,8 @@
+django
+psycopg2
+djangorestframework
+markdown
+django-filter
+pygments
+coreapi
+django-rest-elasticsearch

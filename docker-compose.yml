@@ -1,0 +1,36 @@
+version: '3.1'
+
+services:
+  web:
+    build: .
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - elasticsearch
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: resmanager
+      POSTGRES_PASSWORD: test1234
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+  
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.2
+    ports:
+      - 9200:9200
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.2.2
+    ports:
+      - "5601:5601"
